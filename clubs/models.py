@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 
-class Club(models.Model):
+class Club(models.Model):                               # Club model
     name = models.CharField(max_length=100)
     description = models.TextField()
 
@@ -18,15 +18,15 @@ class Club(models.Model):
         return self.name
 
 class Activity(models.Model):
-    Club = models.ForeignKey(Club, on_delete=models.CASCADE, related_name='activities')
+    club = models.ForeignKey(
+        Club,
+        on_delete=models.CASCADE,
+        related_name="activities"
+    )
     title = models.CharField(max_length=200)
     description = models.TextField()
     date = models.DateField()
-    image = models.ImageField(
-        upload_to = "activity_images/",
-        blank=True,
-        null=True
-    )
+    image = models.ImageField(upload_to="activity_images/", blank=True, null=True)
 
     def __str__(self):
-        return f"{self.title} ({self.Club.name})"
+        return f"{self.title} ({self.club.name})"
