@@ -4,7 +4,7 @@ Django settings for project.
 
 from pathlib import Path
 import os
-
+from corsheaders.defaults import default_headers
 from dotenv import load_dotenv
 import dj_database_url
 
@@ -22,6 +22,27 @@ load_dotenv(BASE_DIR / ".env")
 SECRET_KEY = "django-insecure-q8rd#2709v#givke^7w7zo=3zsu+i@c*f)-59emz0b33bb96(v"
 DEBUG = True
 ALLOWED_HOSTS = []
+
+
+# --------------------------------------------------
+# API's allowed to contact with the backend
+# --------------------------------------------------
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5500",
+    "http://127.0.0.1:5500",
+]
+
+
+#--------------------------------------------------
+# Permissions for CORS
+# --------------------------------------------------
+
+CORS_ALLOW_METHODS = [
+    "GET",
+]
+
+CORS_ALLOW_HEADERS = list(default_headers)
 
 # --------------------------------------------------
 # APPLICATIONS
@@ -41,10 +62,13 @@ INSTALLED_APPS = [
     "events",
     "faculty",
     "innovation",
+    "api",
 
     # third-party
-    "cloudinary",
+    "cloudinary", 
     "cloudinary_storage",
+    "rest_framework",
+    "corsheaders",
 ]
 
 # --------------------------------------------------
@@ -52,6 +76,7 @@ INSTALLED_APPS = [
 # --------------------------------------------------
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
