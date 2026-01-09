@@ -1,0 +1,7 @@
+export const CONFIG = {
+    API_BASE_URL: "https://cse-dept-v-0-1.onrender.com/api",
+    CLUB_URL: "https://cse-dept-v-0-1.onrender.com/api/clubs/",
+    EVENTS_URL: "https://cse-dept-v-0-1.onrender.com/api/events/",
+    FACULTY_URL: "https://cse-dept-v-0-1.onrender.com/api/faculty/",
+    INNOVATION_URL: "https://cse-dept-v-0-1.onrender.com/api/innovation/"
+};

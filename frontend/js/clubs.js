@@ -1,7 +1,10 @@
+import { fetchAPI } from "./api.js";
+
 async function loadClubs() {
+  const container = document.getElementById("clubs");
+
   try {
     const clubs = await fetchAPI("/clubs/");
-    const container = document.getElementById("clubs");
 
     if (clubs.length === 0) {
       container.innerHTML = "<p>No clubs available.</p>";
@@ -14,16 +17,15 @@ async function loadClubs() {
 
       card.innerHTML = `
         ${club.cover_image ? `<img src="${club.cover_image}" alt="${club.name}">` : ""}
-        <div class="content">
-          <h3>${club.name}</h3>
-          <p>${club.description}</p>
-        </div>
+        <h3>${club.name}</h3>
+        <p>${club.description}</p>
       `;
 
       container.appendChild(card);
     });
+
   } catch (err) {
-    console.error("Failed to load clubs", err);
+    container.innerHTML = "<p>Failed to load clubs.</p>";
   }
 }
 
